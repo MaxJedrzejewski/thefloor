@@ -1,0 +1,20 @@
+{
+  "id": "bundled-influencerzy",
+  "name": "Influencerzy",
+  "prompts": [
+    {"id": "inf-1", "kind": "text", "body": "Karol Wiśniewski, współtwórca federacji freak fightów", "answer": "Friz"},
+    {"id": "inf-2", "kind": "text", "body": "Julia Kuczyńska, blogerka modowa", "answer": "Maffashion"},
+    {"id": "inf-3", "kind": "text", "body": "Blogerka modowa i projektantka Jessica Kirschner, pseudonim", "answer": "Jessica Mercedes"},
+    {"id": "inf-4", "kind": "text", "body": "Twórca kanału „Tak Zwany Blog”", "answer": "Krzysztof Gonciarz"},
+    {"id": "inf-5", "kind": "text", "body": "Najbardziej subskrybowany youtuber świata, „Beast Philanthropy”", "answer": "MrBeast"},
+    {"id": "inf-6", "kind": "text", "body": "Szwedzki youtuber, wojna subskrypcji z T-Series", "answer": "PewDiePie"},
+    {"id": "inf-7", "kind": "text", "body": "Tiktoker bez słów, rozkłada ręce w geście „to takie proste”", "answer": "Khaby Lame"},
+    {"id": "inf-8", "kind": "text", "body": "Tiktokerka, młodsza siostra Dixie D'Amelio", "answer": "Charli D'Amelio"},
+    {"id": "inf-9", "kind": "text", "body": "Youtuber i bokser, brat Logana Paula", "answer": "Jake Paul"},
+    {"id": "inf-10", "kind": "text", "body": "Youtuber i bokser, brat Jake'a Paula", "answer": "Logan Paul"},
+    {"id": "inf-11", "kind": "text", "body": "Założyciel kosmetyków Kylie Cosmetics, młodsza siostra Kendall", "answer": "Kylie Jenner"},
+    {"id": "inf-12", "kind": "text", "body": "Włoska influencerka i projektantka, „The Blonde Salad”", "answer": "Chiara Ferragni"},
+    {"id": "inf-13", "kind": "text", "body": "Streamer „Ninja” znany z gry", "answer": "Fortnite"},
+    {"id": "inf-14", "kind": "text", "body": "Youtuber Markiplier ma na imię", "answer": "Mark"}
+  ]
+}

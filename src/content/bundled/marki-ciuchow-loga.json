@@ -1,0 +1,26 @@
+{
+  "id": "bundled-marki-ciuchow-loga",
+  "name": "Marki ciuchów — loga",
+  "prompts": [
+    {"id":"brand-1","kind":"image","body":"/images/ciuchy/adidas.jpg","answer":"Adidas"},
+    {"id":"brand-2","kind":"image","body":"/images/ciuchy/nike.jpg","answer":"Nike"},
+    {"id":"brand-3","kind":"image","body":"/images/ciuchy/lacoste.jpg","answer":"Lacoste"},
+    {"id":"brand-4","kind":"image","body":"/images/ciuchy/ralph-lauren.jpg","answer":"Ralph Lauren"},
+    {"id":"brand-5","kind":"image","body":"/images/ciuchy/puma.jpg","answer":"Puma"},
+    {"id":"brand-6","kind":"image","body":"/images/ciuchy/levis.jpg","answer":"Levi's"},
+    {"id":"brand-7","kind":"image","body":"/images/ciuchy/gucci.jpg","answer":"Gucci"},
+    {"id":"brand-8","kind":"image","body":"/images/ciuchy/chanel.jpg","answer":"Chanel"},
+    {"id":"brand-9","kind":"image","body":"/images/ciuchy/louis-vuitton.jpg","answer":"Louis Vuitton"},
+    {"id":"brand-10","kind":"image","body":"/images/ciuchy/burberry.jpg","answer":"Burberry"},
+    {"id":"brand-11","kind":"image","body":"/images/ciuchy/under-armour.jpg","answer":"Under Armour"},
+    {"id":"brand-12","kind":"image","body":"/images/ciuchy/the-north-face.jpg","answer":"The North Face"},
+    {"id":"brand-13","kind":"image","body":"/images/ciuchy/tommy-hilfiger.jpg","answer":"Tommy Hilfiger"},
+    {"id":"brand-14","kind":"image","body":"/images/ciuchy/calvin-klein.jpg","answer":"Calvin Klein"},
+    {"id":"brand-15","kind":"image","body":"/images/ciuchy/versace.jpg","answer":"Versace"},
+    {"id":"brand-16","kind":"image","body":"/images/ciuchy/converse.jpg","answer":"Converse"},
+    {"id":"brand-17","kind":"image","body":"/images/ciuchy/supreme.jpg","answer":"Supreme"},
+    {"id":"brand-18","kind":"image","body":"/images/ciuchy/air-jordan.jpg","answer":"Air Jordan"},
+    {"id":"brand-19","kind":"image","body":"/images/ciuchy/timberland.jpg","answer":"Timberland"},
+    {"id":"brand-20","kind":"image","body":"/images/ciuchy/fendi.jpg","answer":"Fendi"}
+  ]
+}

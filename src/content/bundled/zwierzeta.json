@@ -1,0 +1,26 @@
+{
+  "id": "bundled-zwierzeta",
+  "name": "Zwierzęta",
+  "prompts": [
+    {"id": "ani-1", "kind": "image", "body": "/images/zwierzeta/gepard.jpg", "answer": "Gepard"},
+    {"id": "ani-2", "kind": "image", "body": "/images/zwierzeta/pletwal-blekitny.jpg", "answer": "Płetwal błękitny"},
+    {"id": "ani-3", "kind": "image", "body": "/images/zwierzeta/zyrafa.jpg", "answer": "Żyrafa"},
+    {"id": "ani-4", "kind": "image", "body": "/images/zwierzeta/nietoperz.jpg", "answer": "Nietoperz"},
+    {"id": "ani-5", "kind": "image", "body": "/images/zwierzeta/dziobak.jpg", "answer": "Dziobak"},
+    {"id": "ani-6", "kind": "image", "body": "/images/zwierzeta/kangur.jpg", "answer": "Kangur"},
+    {"id": "ani-7", "kind": "image", "body": "/images/zwierzeta/koala.jpg", "answer": "Koala"},
+    {"id": "ani-8", "kind": "image", "body": "/images/zwierzeta/panda.jpg", "answer": "Panda"},
+    {"id": "ani-9", "kind": "image", "body": "/images/zwierzeta/mors.jpg", "answer": "Mors"},
+    {"id": "ani-10", "kind": "image", "body": "/images/zwierzeta/nosorozec.jpg", "answer": "Nosorożec"},
+    {"id": "ani-11", "kind": "image", "body": "/images/zwierzeta/slon.jpg", "answer": "Słoń"},
+    {"id": "ani-12", "kind": "image", "body": "/images/zwierzeta/wielblad.jpg", "answer": "Wielbłąd"},
+    {"id": "ani-13", "kind": "image", "body": "/images/zwierzeta/zebra.jpg", "answer": "Zebra"},
+    {"id": "ani-14", "kind": "image", "body": "/images/zwierzeta/strus.jpg", "answer": "Struś"},
+    {"id": "ani-15", "kind": "image", "body": "/images/zwierzeta/zubr.jpg", "answer": "Żubr"},
+    {"id": "ani-16", "kind": "image", "body": "/images/zwierzeta/orzel-bialy.jpg", "answer": "Orzeł biały"},
+    {"id": "ani-17", "kind": "image", "body": "/images/zwierzeta/kameleon.jpg", "answer": "Kameleon"},
+    {"id": "ani-18", "kind": "image", "body": "/images/zwierzeta/pingwin.jpg", "answer": "Pingwin"},
+    {"id": "ani-19", "kind": "image", "body": "/images/zwierzeta/leniwiec.jpg", "answer": "Leniwiec"},
+    {"id": "ani-20", "kind": "image", "body": "/images/zwierzeta/bocian.jpg", "answer": "Bocian"}
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "id": "bundled-alkohole-i-drinki",
+  "name": "Alkohole i drinki",
+  "prompts": [
+    {"id":"alc-1","kind":"text","body":"Mojito — jaki alkohol jest bazą?","answer":"Rum"},
+    {"id":"alc-2","kind":"text","body":"Margarita — jaki alkohol jest bazą?","answer":"Tequila"},
+    {"id":"alc-3","kind":"text","body":"Bloody Mary — jaki alkohol i jaki sok?","answer":"Wódka i sok pomidorowy"},
+    {"id":"alc-4","kind":"text","body":"Piña colada — jakie dwa owoce lub składniki poza rumem?","answer":"Ananas i kokos"},
+    {"id":"alc-5","kind":"text","body":"Aperol Spritz — co poza Aperolem i wodą gazowaną?","answer":"Prosecco"},
+    {"id":"alc-6","kind":"text","body":"Moscow Mule — w jakim naczyniu podaje się go tradycyjnie?","answer":"Miedziany kubek"},
+    {"id":"alc-7","kind":"text","body":"Negroni — trzy składniki: gin, wermut i …","answer":"Campari"},
+    {"id":"alc-8","kind":"text","body":"Cosmopolitan — jaki sok nadaje różowy kolor?","answer":"Żurawinowy"},
+    {"id":"alc-9","kind":"text","body":"Old Fashioned — jaki alkohol jest bazą?","answer":"Bourbon"},
+    {"id":"alc-10","kind":"text","body":"Caipirinha — jaki alkohol z trzciny cukrowej?","answer":"Cachaça"},
+    {"id":"alc-11","kind":"text","body":"Wódka „Żubrówka” ma w butelce źdźbło …","answer":"Trawy żubrowej"},
+    {"id":"alc-12","kind":"text","body":"Jack Daniel's pochodzi ze stanu …","answer":"Tennessee"},
+    {"id":"alc-13","kind":"text","body":"Jägermeister ma na etykiecie …","answer":"Jelenia"},
+    {"id":"alc-14","kind":"text","body":"Absolut Vodka pochodzi z …","answer":"Szwecji"},
+    {"id":"alc-15","kind":"text","body":"Baileys to likier …","answer":"Śmietankowy"},
+    {"id":"alc-16","kind":"text","body":"Szampan pochodzi z …","answer":"Szampanii (Francja)"},
+    {"id":"alc-17","kind":"text","body":"Sake pochodzi z …","answer":"Japonii"},
+    {"id":"alc-18","kind":"text","body":"Ouzo pochodzi z …","answer":"Grecji"},
+    {"id":"alc-19","kind":"text","body":"Tequilę robi się z …","answer":"Agawy"},
+    {"id":"alc-20","kind":"text","body":"Amaretto pachnie …","answer":"Migdałami"}
+  ]
+}

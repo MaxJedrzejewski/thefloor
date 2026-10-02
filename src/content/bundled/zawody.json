@@ -1,0 +1,31 @@
+{
+  "id": "bundled-zawody",
+  "name": "Zawody",
+  "prompts": [
+    {"id":"job-1","kind":"text","body":"Leczy zęby","answer":"Dentysta"},
+    {"id":"job-2","kind":"text","body":"Gasi pożary","answer":"Strażak"},
+    {"id":"job-3","kind":"text","body":"Naprawia rury i krany","answer":"Hydraulik"},
+    {"id":"job-4","kind":"text","body":"Układa włosy","answer":"Fryzjer"},
+    {"id":"job-5","kind":"text","body":"Piecze chleb","answer":"Piekarz"},
+    {"id":"job-6","kind":"text","body":"Uczy w szkole","answer":"Nauczyciel"},
+    {"id":"job-7","kind":"text","body":"Projektuje budynki","answer":"Architekt"},
+    {"id":"job-8","kind":"text","body":"Broni w sądzie klienta","answer":"Adwokat"},
+    {"id":"job-9","kind":"text","body":"Pisze programy komputerowe","answer":"Programista"},
+    {"id":"job-10","kind":"text","body":"Prowadzi samolot","answer":"Pilot"},
+    {"id":"job-11","kind":"text","body":"Rozwozi listy i paczki","answer":"Listonosz"},
+    {"id":"job-12","kind":"text","body":"Wydaje wyrok w sądzie","answer":"Sędzia"},
+    {"id":"job-13","kind":"text","body":"Leczy zwierzęta","answer":"Weterynarz"},
+    {"id":"job-14","kind":"text","body":"Robi zdjęcia","answer":"Fotograf"},
+    {"id":"job-15","kind":"text","body":"Prowadzi pociąg","answer":"Maszynista"},
+    {"id":"job-16","kind":"text","body":"Buduje ściany z cegieł","answer":"Murarz"},
+    {"id":"job-17","kind":"text","body":"Podaje do stołu w restauracji","answer":"Kelner"},
+    {"id":"job-18","kind":"text","body":"Gotuje w restauracji","answer":"Kucharz"},
+    {"id":"job-19","kind":"text","body":"Naprawia samochody","answer":"Mechanik"},
+    {"id":"job-20","kind":"text","body":"Instaluje kable i gniazdka","answer":"Elektryk"},
+    {"id":"job-21","kind":"text","body":"Szyje ubrania","answer":"Krawiec"},
+    {"id":"job-22","kind":"text","body":"Wydobywa węgiel pod ziemią","answer":"Górnik"},
+    {"id":"job-23","kind":"text","body":"Ratuje ludzi w Tatrach","answer":"Ratownik górski"},
+    {"id":"job-24","kind":"text","body":"Wozi pasażerów za opłatą autem","answer":"Taksówkarz"},
+    {"id":"job-25","kind":"text","body":"Operuje pacjentów","answer":"Chirurg"}
+  ]
+}

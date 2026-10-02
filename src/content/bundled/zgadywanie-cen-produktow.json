@@ -1,0 +1,26 @@
+{
+  "id": "bundled-zgadywanie-cen-produktow",
+  "name": "Zgadywanie cen produktów",
+  "prompts": [
+    {"id":"price-1","kind":"text","body":"Ile mniej więcej kosztuje bochenek chleba?","answer":"ok. 6 zł"},
+    {"id":"price-2","kind":"text","body":"Ile kosztuje litr mleka w sklepie?","answer":"ok. 4 zł"},
+    {"id":"price-3","kind":"text","body":"Ile kosztuje 10 jaj?","answer":"ok. 12 zł"},
+    {"id":"price-4","kind":"text","body":"Ile kosztuje kilogram jabłek?","answer":"ok. 5 zł"},
+    {"id":"price-5","kind":"text","body":"Ile kosztuje kilogram ziemniaków?","answer":"ok. 4 zł"},
+    {"id":"price-6","kind":"text","body":"Ile kosztuje kostka masła 200 g?","answer":"ok. 8 zł"},
+    {"id":"price-7","kind":"text","body":"Ile kosztuje 1,5 l coli?","answer":"ok. 8 zł"},
+    {"id":"price-8","kind":"text","body":"Ile kosztuje puszka piwa 0,5 l?","answer":"ok. 5 zł"},
+    {"id":"price-9","kind":"text","body":"Ile kosztuje bilet do kina?","answer":"ok. 35 zł"},
+    {"id":"price-10","kind":"text","body":"Ile kosztuje kebab w budce?","answer":"ok. 25 zł"},
+    {"id":"price-11","kind":"text","body":"Ile kosztuje zestaw Big Mac w McDonald's?","answer":"ok. 30 zł"},
+    {"id":"price-12","kind":"text","body":"Ile kosztuje litr benzyny 95?","answer":"ok. 6 zł"},
+    {"id":"price-13","kind":"text","body":"Ile kosztuje pizza w pizzerii?","answer":"ok. 40 zł"},
+    {"id":"price-14","kind":"text","body":"Ile kosztuje tabliczka czekolady 100 g?","answer":"ok. 7 zł"},
+    {"id":"price-15","kind":"text","body":"Ile kosztuje pasta do zębów?","answer":"ok. 10 zł"},
+    {"id":"price-16","kind":"text","body":"Ile kosztuje konsola PlayStation 5?","answer":"ok. 2200 zł"},
+    {"id":"price-17","kind":"text","body":"Ile kosztuje iPhone w podstawowej wersji?","answer":"ok. 4000 zł"},
+    {"id":"price-18","kind":"text","body":"Ile kosztuje latte w kawiarni?","answer":"ok. 15 zł"},
+    {"id":"price-19","kind":"text","body":"Ile kosztuje 1 kg kurczaka (filet)?","answer":"ok. 20 zł"},
+    {"id":"price-20","kind":"text","body":"Ile kosztuje bilet 20-minutowy w komunikacji miejskiej Warszawy?","answer":"ok. 4,50 zł"}
+  ]
+}

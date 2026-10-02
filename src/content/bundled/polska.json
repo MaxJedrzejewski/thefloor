@@ -1,0 +1,31 @@
+{
+  "id": "bundled-polska",
+  "name": "Polska",
+  "prompts": [
+    {"id":"pl-1","kind":"text","body":"Stolica Polski","answer":"Warszawa"},
+    {"id":"pl-2","kind":"text","body":"Najdłuższa rzeka w Polsce","answer":"Wisła"},
+    {"id":"pl-3","kind":"text","body":"Najwyższy szczyt Polski","answer":"Rysy"},
+    {"id":"pl-4","kind":"text","body":"Największe jezioro w Polsce","answer":"Śniardwy"},
+    {"id":"pl-5","kind":"text","body":"Pierwszy koronowany król Polski","answer":"Bolesław Chrobry"},
+    {"id":"pl-6","kind":"text","body":"Hymn Polski to …","answer":"Mazurek Dąbrowskiego"},
+    {"id":"pl-7","kind":"text","body":"Ile jest województw?","answer":"16"},
+    {"id":"pl-8","kind":"text","body":"Polka, laureatka Nobla z literatury w 2018 roku","answer":"Olga Tokarczuk"},
+    {"id":"pl-9","kind":"text","body":"Legendarny smok z Krakowa","answer":"Smok Wawelski"},
+    {"id":"pl-10","kind":"text","body":"Godło Polski","answer":"Orzeł biały"},
+    {"id":"pl-11","kind":"text","body":"Drugie pod względem liczby ludności miasto","answer":"Kraków"},
+    {"id":"pl-12","kind":"text","body":"Morze na północy Polski","answer":"Bałtyckie"},
+    {"id":"pl-13","kind":"text","body":"Rok chrztu Polski","answer":"966"},
+    {"id":"pl-14","kind":"text","body":"Bitwa pod Grunwaldem, rok","answer":"1410"},
+    {"id":"pl-15","kind":"text","body":"Data uchwalenia Konstytucji, święto narodowe","answer":"3 maja"},
+    {"id":"pl-16","kind":"text","body":"Polski papież","answer":"Jan Paweł II"},
+    {"id":"pl-17","kind":"text","body":"Miasto Mikołaja Kopernika","answer":"Toruń"},
+    {"id":"pl-18","kind":"text","body":"Miasto z Syrenką w herbie","answer":"Warszawa"},
+    {"id":"pl-19","kind":"text","body":"Kopalnia soli pod Krakowem","answer":"Wieliczka"},
+    {"id":"pl-20","kind":"text","body":"Waluta Polski","answer":"Złoty"},
+    {"id":"pl-21","kind":"text","body":"Numer alarmowy w UE","answer":"112"},
+    {"id":"pl-22","kind":"text","body":"Największa polska wyspa","answer":"Wolin"},
+    {"id":"pl-23","kind":"text","body":"Ile państw sąsiaduje z Polską?","answer":"7"},
+    {"id":"pl-24","kind":"text","body":"Miasto z krasnalami","answer":"Wrocław"},
+    {"id":"pl-25","kind":"text","body":"Stolica województwa podkarpackiego","answer":"Rzeszów"}
+  ]
+}

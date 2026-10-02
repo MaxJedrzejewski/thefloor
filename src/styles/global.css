@@ -1,0 +1,817 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+p,
+ul,
+ol {
+  margin: 0;
+}
+
+ul,
+ol {
+  list-style: none;
+  padding: 0;
+}
+
+kbd {
+  display: inline-block;
+  padding: 0.1em 0.4em;
+  border: 1px solid var(--border-bright);
+  border-radius: 4px;
+  background: var(--bg-sunken);
+  font-family: var(--font-clock);
+  font-size: 0.85em;
+  color: var(--text-muted);
+}
+
+/* ---------------------------------------------------------------- buttons */
+
+.button {
+  padding: 0.6rem 1.1rem;
+  border: 1px solid var(--border-bright);
+  border-radius: var(--radius);
+  background: var(--bg-raised);
+  color: var(--text);
+  font: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s;
+}
+
+.button:hover:not(:disabled) {
+  background: var(--border);
+  border-color: var(--accent-dim);
+}
+
+.button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.button.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #04101f;
+  font-weight: 650;
+}
+
+.button.primary:hover:not(:disabled) {
+  background: #6fb5ff;
+  border-color: #6fb5ff;
+}
+
+.button.primary kbd {
+  border-color: rgba(4, 16, 31, 0.3);
+  background: rgba(4, 16, 31, 0.12);
+  color: #04101f;
+}
+
+.button.ghost {
+  background: transparent;
+  border-color: var(--border);
+  color: var(--text-muted);
+}
+
+.button.ghost.is-active {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.button.small {
+  padding: 0.35rem 0.7rem;
+  font-size: 0.85rem;
+}
+
+.button.large {
+  padding: 0.9rem 1.6rem;
+  font-size: 1.1rem;
+}
+
+/* ------------------------------------------------------------ duel screen */
+
+.duel-screen {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  height: 100%;
+  background: var(--bg-sunken);
+  transition: background-color 0.15s ease-out;
+}
+
+.duel-screen.is-reveal-correct {
+  background-color: color-mix(in srgb, var(--success) 22%, var(--bg-sunken));
+}
+
+.duel-screen.is-reveal-pass {
+  background-color: color-mix(in srgb, var(--danger) 22%, var(--bg-sunken));
+}
+
+.duel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.duel-label,
+.judge-label {
+  color: var(--text-dim);
+  font-size: 0.75em;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-right: 0.5em;
+}
+
+.duel-category {
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.02em;
+}
+
+.duel-body {
+  display: grid;
+  grid-template-columns: minmax(210px, 1fr) minmax(0, 2.8fr) minmax(210px, 1fr);
+  align-items: stretch;
+  min-height: 0;
+}
+
+/* The three-way signal — size, brightness, motion — so the running clock reads
+   from across a room without relying on colour alone. */
+.clock-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 1.5rem 1.75rem;
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  transition: opacity 0.2s;
+}
+
+.clock-panel.is-idle {
+  opacity: 0.32;
+}
+
+.clock-name {
+  font-size: clamp(1rem, 1.6vw, 1.5rem);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+
+.clock-digits {
+  font-family: var(--font-clock);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  line-height: 1;
+  font-size: clamp(1.9rem, 2.6vw, 2.8rem);
+}
+
+.clock-panel.is-active .clock-digits {
+  font-size: clamp(3rem, 5vw, 5.5rem);
+  color: var(--accent);
+}
+
+.clock-panel.is-danger .clock-digits {
+  color: var(--danger);
+  animation: clock-pulse 1s ease-in-out infinite;
+}
+
+@keyframes clock-pulse {
+  50% {
+    opacity: 0.55;
+  }
+}
+
+.clock-status {
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  color: var(--text-dim);
+}
+
+.clock-panel.is-active .clock-status {
+  color: var(--accent);
+}
+
+.clock-bar {
+  position: absolute;
+  top: 1.5rem;
+  bottom: 1.5rem;
+  width: 6px;
+  border-radius: 3px;
+  background: var(--bg-raised);
+  overflow: hidden;
+}
+
+.clock-panel.left .clock-bar {
+  left: 0.75rem;
+}
+
+.clock-panel.right .clock-bar {
+  right: 0.75rem;
+}
+
+.clock-bar-fill {
+  height: 100%;
+  background: var(--accent);
+  transform-origin: bottom;
+}
+
+.clock-panel.is-danger .clock-bar-fill {
+  background: var(--danger);
+}
+
+.prompt-column {
+  position: relative;
+  display: flex;
+  min-width: 0;
+}
+
+.prompt-stage {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  min-width: 0;
+}
+
+.prompt-text {
+  text-align: center;
+  font-weight: 650;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+.prompt-text.size-xl {
+  font-size: clamp(2.5rem, 6.5vw, 7rem);
+}
+
+.prompt-text.size-lg {
+  font-size: clamp(2rem, 4.8vw, 5rem);
+}
+
+.prompt-text.size-md {
+  font-size: clamp(1.6rem, 3.4vw, 3.4rem);
+}
+
+.prompt-text.size-sm {
+  font-size: clamp(1.3rem, 2.4vw, 2.4rem);
+}
+
+.prompt-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: var(--radius);
+}
+
+.prompt-empty {
+  color: var(--text-dim);
+  font-size: 1.2rem;
+}
+
+/* Opaque on purpose: a paused clue must not be free thinking time. */
+.paused-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-sunken);
+}
+
+.paused-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem 2.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--bg-raised);
+  text-align: center;
+  max-width: 34rem;
+}
+
+.paused-card p {
+  color: var(--text-muted);
+}
+
+/* Big, colour-coded, and brief — the room's cue that a call just landed. */
+.reveal-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  text-align: center;
+  padding: 1.5rem;
+}
+
+.reveal-overlay.is-correct {
+  background: color-mix(in srgb, var(--success) 30%, var(--bg-sunken) 85%);
+}
+
+.reveal-overlay.is-pass {
+  background: color-mix(in srgb, var(--danger) 30%, var(--bg-sunken) 85%);
+}
+
+.reveal-label {
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.reveal-overlay.is-correct .reveal-label {
+  color: var(--success);
+}
+
+.reveal-overlay.is-pass .reveal-label {
+  color: var(--danger);
+}
+
+/* Opaque, like the pause overlay: no clue reading during the countdown. */
+.countdown-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  background: var(--bg-sunken);
+}
+
+.countdown-label {
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.countdown-number {
+  font-size: clamp(3rem, 10vw, 7rem);
+  font-weight: 700;
+  color: var(--text);
+}
+
+.reveal-answer {
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 700;
+  color: var(--text);
+}
+
+.judge-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 0.55rem 1.5rem;
+  border-top: 1px solid var(--border);
+  background: var(--bg);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.judge-answer {
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.judge-keys {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  color: var(--text-dim);
+  font-size: 0.8rem;
+}
+
+.judge-key.is-disabled {
+  opacity: 0.4;
+}
+
+/* --------------------------------------------------------- shared screens */
+
+.screen {
+  max-width: 62rem;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.screen-header h1 {
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  letter-spacing: -0.02em;
+}
+
+.screen-header.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.lede {
+  margin-top: 0.6rem;
+  color: var(--text-muted);
+  max-width: 44rem;
+  line-height: 1.55;
+}
+
+.muted {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.hint {
+  color: var(--text-dim);
+  font-size: 0.88rem;
+  line-height: 1.5;
+  max-width: 44rem;
+}
+
+.error {
+  color: var(--danger);
+  font-size: 0.88rem;
+}
+
+.warning {
+  color: #ffb347;
+  font-size: 0.85rem;
+}
+
+.panel {
+  padding: 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--bg-raised);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.field > span {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  letter-spacing: 0.04em;
+}
+
+input[type='text'],
+textarea {
+  padding: 0.55rem 0.7rem;
+  border: 1px solid var(--border-bright);
+  border-radius: var(--radius);
+  background: var(--bg-sunken);
+  color: var(--text);
+  font: inherit;
+  width: 100%;
+}
+
+input[type='text']:focus,
+textarea:focus {
+  outline: 2px solid var(--accent-dim);
+  outline-offset: 1px;
+}
+
+.seed-badge {
+  display: inline-grid;
+  place-items: center;
+  min-width: 1.75rem;
+  height: 1.75rem;
+  padding: 0 0.4rem;
+  border-radius: 999px;
+  background: var(--bg-sunken);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.seed-badge.small {
+  min-width: 1.4rem;
+  height: 1.4rem;
+  font-size: 0.7rem;
+}
+
+/* ----------------------------------------------------------- setup screen */
+
+.player-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.player-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.category-choices {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  gap: 0.4rem;
+}
+
+.category-choices label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+.category-choices .muted {
+  margin-left: auto;
+  font-size: 0.78rem;
+}
+
+/* --------------------------------------------------------- bracket screen */
+
+.next-up h2 {
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+}
+
+.versus {
+  color: var(--text-dim);
+  font-weight: 400;
+  font-size: 0.65em;
+  margin: 0 0.4em;
+}
+
+.ready-match-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.ready-match-button {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.15rem;
+}
+
+.bracket-tree {
+  display: flex;
+  gap: 1.25rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+}
+
+.bracket-round {
+  min-width: 13rem;
+  flex: 1;
+}
+
+.bracket-round h3 {
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 0.6rem;
+}
+
+.bracket-round ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.match-card {
+  padding: 0.6rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-raised);
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.match-card.is-next {
+  border-color: var(--accent);
+}
+
+.match-card.is-bye {
+  opacity: 0.6;
+}
+
+.bracket-slot {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.92rem;
+}
+
+.bracket-slot.won {
+  color: var(--success);
+  font-weight: 600;
+}
+
+.bracket-slot.lost {
+  color: var(--text-dim);
+  text-decoration: line-through;
+}
+
+.match-note {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+}
+
+.match-note.next {
+  color: var(--accent);
+}
+
+/* ----------------------------------------------- intro / result / champion */
+
+.intro-screen,
+.result-screen,
+.champion-screen {
+  align-items: center;
+  text-align: center;
+}
+
+.intro-versus,
+.result-winner,
+.champion-name {
+  font-size: clamp(2rem, 5vw, 3.6rem);
+  letter-spacing: -0.02em;
+}
+
+.champion-name {
+  color: var(--success);
+}
+
+.intro-draw {
+  align-items: center;
+  min-width: min(100%, 26rem);
+}
+
+.intro-category {
+  font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.rules-reminder {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  text-align: left;
+  max-width: 34rem;
+}
+
+.rules-reminder li::before {
+  content: '·';
+  color: var(--text-dim);
+  margin-right: 0.5em;
+}
+
+.result-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  gap: 1rem;
+  width: min(100%, 40rem);
+}
+
+.result-card {
+  align-items: center;
+}
+
+.result-card.won {
+  border-color: var(--success);
+}
+
+.result-clock {
+  font-family: var(--font-clock);
+  font-variant-numeric: tabular-nums;
+  font-size: 2.4rem;
+  font-weight: 700;
+}
+
+.result-card.lost .result-clock {
+  color: var(--danger);
+}
+
+/* ---------------------------------------------------------- editor screen */
+
+.category-list,
+.prompt-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.category-row {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.category-row h2 {
+  font-size: 1.1rem;
+}
+
+.row-actions {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.prompt-row-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.prompt-thumb {
+  max-height: 8rem;
+  border-radius: var(--radius);
+  margin-top: 0.4rem;
+}
+
+.issue-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+@media (max-width: 720px) {
+  .duel-body {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+  }
+
+  .clock-bar {
+    display: none;
+  }
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+  gap: 0.75rem;
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0;
+}
+
+.category-grid .button {
+  width: 100%;
+}

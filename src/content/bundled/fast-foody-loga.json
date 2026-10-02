@@ -1,0 +1,21 @@
+{
+  "id": "bundled-fast-foody-loga",
+  "name": "Fast foody — loga",
+  "prompts": [
+    {"id": "ff-1", "kind": "image", "body": "/images/fastfood/mcdonalds.jpg", "answer": "McDonald's"},
+    {"id": "ff-2", "kind": "image", "body": "/images/fastfood/kfc.jpg", "answer": "KFC"},
+    {"id": "ff-3", "kind": "image", "body": "/images/fastfood/pizza-hut.jpg", "answer": "Pizza Hut"},
+    {"id": "ff-4", "kind": "image", "body": "/images/fastfood/dominos.jpg", "answer": "Domino's"},
+    {"id": "ff-5", "kind": "image", "body": "/images/fastfood/burger-king.jpg", "answer": "Burger King"},
+    {"id": "ff-6", "kind": "image", "body": "/images/fastfood/subway.jpg", "answer": "Subway"},
+    {"id": "ff-7", "kind": "image", "body": "/images/fastfood/wendys.jpg", "answer": "Wendy's"},
+    {"id": "ff-8", "kind": "image", "body": "/images/fastfood/taco-bell.jpg", "answer": "Taco Bell"},
+    {"id": "ff-9", "kind": "image", "body": "/images/fastfood/dunkin.jpg", "answer": "Dunkin'"},
+    {"id": "ff-10", "kind": "image", "body": "/images/fastfood/papa-johns.jpg", "answer": "Papa John's"},
+    {"id": "ff-11", "kind": "text", "body": "Big Mac to hit sieci", "answer": "McDonald's"},
+    {"id": "ff-12", "kind": "text", "body": "Whopper to hit sieci", "answer": "Burger King"},
+    {"id": "ff-13", "kind": "text", "body": "Zinger to hit sieci", "answer": "KFC"},
+    {"id": "ff-14", "kind": "image", "body": "/images/fastfood/carls-jr.jpg", "answer": "Carl's Jr."},
+    {"id": "ff-15", "kind": "image", "body": "/images/fastfood/five-guys.jpg", "answer": "Five Guys"}
+  ]
+}
