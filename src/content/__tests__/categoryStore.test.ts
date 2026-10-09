@@ -90,6 +90,45 @@ describe('saveCustomCategory', () => {
   });
 });
 
+describe('bundled prompts added after an edit was saved', () => {
+  it('still shows up in a customised bundled category', () => {
+    const bundled = BUNDLED_CATEGORIES[0]!;
+    const stale = { ...bundled, source: 'custom' as const, prompts: bundled.prompts.slice(1) };
+    saveCustomCategory(stale);
+    const loaded = loadCategories()[bundled.id]!;
+    expect(loaded.prompts).toHaveLength(bundled.prompts.length);
+    expect(loaded.prompts.map((p) => p.id)).toContain(bundled.prompts[0]!.id);
+  });
+});
+
+describe('stale copy of a bundled category', () => {
+  it('drops shipped images that no longer exist but keeps uploads', () => {
+    const bundled = BUNDLED_CATEGORIES[0]!;
+    const gone = { id: 'gone', kind: 'image' as const, body: '/images/removed.jpg', answer: 'x' };
+    const upload = { id: 'up', kind: 'image' as const, body: 'data:image/png;base64,AAAA', answer: 'y' };
+    const blank = { id: 'blank', kind: 'image' as const, body: '', answer: 'z' };
+    saveCustomCategory({ ...bundled, source: 'custom', prompts: [...bundled.prompts, gone, blank, upload] });
+    const ids = loadCategories()[bundled.id]!.prompts.map((p) => p.id);
+    expect(ids).not.toContain('gone');
+    expect(ids).not.toContain('blank');
+    expect(ids).toContain('up');
+  });
+});
+
+describe('copy saved before a bundled category was rewritten', () => {
+  it('yields to the file but keeps prompts the host created', () => {
+    const bundled = BUNDLED_CATEGORIES.find((c) => (c.revision ?? 0) > 0)!;
+    const oldText = { id: 'eq-1', kind: 'text' as const, body: '5 + 5', answer: '10' };
+    const mine = { id: 'pr_mine', kind: 'text' as const, body: 'Moje', answer: 'tak' };
+    const payload = { version: 1, categories: [{ ...bundled, source: 'custom', revision: undefined, prompts: [oldText, mine] }] };
+    localStorage.setItem(CATEGORIES_KEY, JSON.stringify(payload));
+    const ids = loadCategories()[bundled.id]!.prompts.map((p) => p.id);
+    expect(ids).not.toContain('eq-1');
+    expect(ids).toContain('pr_mine');
+    expect(ids).toHaveLength(bundled.prompts.length + 1);
+  });
+});
+
 describe('deleteCustomCategory', () => {
   it('removes a custom category', () => {
     saveCustomCategory(customCategory());

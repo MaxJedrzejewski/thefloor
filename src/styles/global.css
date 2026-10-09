@@ -830,3 +830,48 @@ textarea:focus {
   flex-direction: column;
   gap: 0.25rem;
 }
+
+/* Host second screen */
+.host-screen {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  min-height: 100vh;
+  padding: 1.5rem 2rem;
+}
+
+.host-idle {
+  align-items: center;
+  justify-content: center;
+}
+
+.host-header {
+  display: flex;
+  justify-content: space-between;
+  color: var(--text-muted);
+}
+
+.host-clocks {
+  display: flex;
+  justify-content: space-around;
+}
+
+.host-clock {
+  text-align: center;
+  opacity: 0.6;
+}
+
+.host-clock.is-active {
+  opacity: 1;
+}
+
+.host-answer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: clamp(3rem, 10vw, 8rem);
+  font-weight: 700;
+}

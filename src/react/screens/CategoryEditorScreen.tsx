@@ -83,13 +83,13 @@ export function CategoryEditorScreen({ categories, onSave, onDelete, onDone }: P
                   >
                     Edit
                   </button>
-                  {category.source === 'custom' && (
+                  {category.source === 'custom' && !category.id.startsWith('bundled-') && (
                     <button
                       type="button"
                       className="button ghost small"
                       onClick={() => onDelete(category.id)}
                     >
-                      {categories[category.id]?.id.startsWith('bundled-') ? 'Reset' : 'Delete'}
+                      Delete
                     </button>
                   )}
                 </div>

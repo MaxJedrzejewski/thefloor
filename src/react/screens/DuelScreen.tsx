@@ -8,6 +8,7 @@ import { JudgeBar } from '../components/JudgeBar';
 import { PausedOverlay } from '../components/PausedOverlay';
 import { RevealOverlay, type RevealOutcome } from '../components/RevealOverlay';
 import { CountdownOverlay } from '../components/CountdownOverlay';
+import { buildSnapshot, publishSnapshot } from '../../app/hostChannel';
 import { playCorrectSound, playPassSound } from '../audio/feedbackSounds';
 import { currentPrompt, consumedPromptIds } from '../../engine/duel/selectors';
 import type { DuelSetup, DuelSummary } from '../../engine/duel/types';
@@ -48,6 +49,8 @@ export function DuelScreen({ setup, seed, roundLabel, onFinished, onAbandon }: P
   const [countdown, setCountdown] = useState(COUNTDOWN_SECONDS);
   const revealTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const { state, correct, pass, start, pause, resume, undo, canUndo, displayMs } = duel;
+  const displayMsRef = useRef(displayMs);
+  displayMsRef.current = displayMs;
 
   useEffect(() => {
     if (state.phase !== 'ready') return;
@@ -80,6 +83,23 @@ export function DuelScreen({ setup, seed, roundLabel, onFinished, onAbandon }: P
   }, []);
 
   const prompt = currentPrompt(state);
+
+  // While running, TICK rewrites remainingMs ten times a second; the host window runs the
+  // live clock itself from `sentAt`, so only real events (judging, pause, undo) republish.
+  useEffect(() => {
+    publishSnapshot(buildSnapshot(state, displayMsRef.current, roundLabel, prompt, Date.now()));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    state.phase,
+    state.active,
+    state.pauseReason,
+    state.phase === 'running' ? null : state.remainingMs,
+    state.timeline.length,
+    prompt?.id,
+    roundLabel,
+  ]);
+
+  useEffect(() => () => publishSnapshot({ kind: 'idle' }), []);
 
   const judge = useCallback(
     (outcome: RevealOutcome) => {

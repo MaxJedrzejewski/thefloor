@@ -1,4 +1,5 @@
 import { BracketTree } from '../components/BracketTree';
+import { openHostWindow } from '../../app/hostChannel';
 import { useHotkeys } from '../hooks/useHotkeys';
 import { wildcardCandidates, wildcardSlots } from '../../engine/bracket/wildcard';
 import { matchPlayers, readyMatches, roundLabel, completedMatchCount } from '../../engine/bracket/selectors';
@@ -16,7 +17,7 @@ export function BracketScreen({ tournament, onPickCategory, onAssignWildcard, on
   const solePick = ready.length === 1 ? ready[0]! : null;
   const [a, b] = solePick ? matchPlayers(tournament.bracket, solePick) : [null, null];
 
-  useHotkeys({ enter: solePick ? () => onPickCategory(solePick.id) : undefined });
+  useHotkeys({ enter: solePick ? () => onPickCategory(solePick.id) : undefined, h: openHostWindow });
 
   return (
     <div className="screen bracket-screen">
@@ -27,6 +28,9 @@ export function BracketScreen({ tournament, onPickCategory, onAssignWildcard, on
             {completedMatchCount(tournament.bracket)} of {tournament.bracket.order.length} matches settled
           </p>
         </div>
+        <button type="button" className="button ghost small" onClick={openHostWindow}>
+          Host screen <kbd>H</kbd>
+        </button>
         <button type="button" className="button ghost small" onClick={onNewTournament}>
           New tournament
         </button>

@@ -2,30 +2,215 @@
   "id": "bundled-czesci-samochodowe",
   "name": "Części samochodowe",
   "prompts": [
-    {"id":"part-1","kind":"image","body":"/images/czesci/skrzynia-biegow.jpg","answer":"Skrzynia biegów"},
-    {"id":"part-2","kind":"image","body":"/images/czesci/tlumik.jpg","answer":"Tłumik"},
-    {"id":"part-3","kind":"image","body":"/images/czesci/filtr-oleju.jpg","answer":"Filtr oleju"},
-    {"id":"part-4","kind":"image","body":"/images/czesci/hamulce.jpg","answer":"Hamulce"},
-    {"id":"part-5","kind":"image","body":"/images/czesci/pasek-rozrzadu.jpg","answer":"Pasek rozrządu"},
-    {"id":"part-6","kind":"image","body":"/images/czesci/chlodnica.jpg","answer":"Chłodnica"},
-    {"id":"part-7","kind":"image","body":"/images/czesci/rozrusznik.jpg","answer":"Rozrusznik"},
-    {"id":"part-8","kind":"image","body":"/images/czesci/alternator.jpg","answer":"Alternator"},
-    {"id":"part-9","kind":"image","body":"/images/czesci/akumulator.jpg","answer":"Akumulator"},
-    {"id":"part-10","kind":"image","body":"/images/czesci/swiece-zaplonowe.jpg","answer":"Świece zapłonowe"},
-    {"id":"part-11","kind":"image","body":"/images/czesci/amortyzator.jpg","answer":"Amortyzator"},
-    {"id":"part-12","kind":"image","body":"/images/czesci/sprzeglo.jpg","answer":"Sprzęgło"},
-    {"id":"part-13","kind":"image","body":"/images/czesci/wycieraczki.jpg","answer":"Wycieraczki"},
-    {"id":"part-14","kind":"image","body":"/images/czesci/turbosprezarka.jpg","answer":"Turbosprężarka"},
-    {"id":"part-15","kind":"image","body":"/images/czesci/katalizator.jpg","answer":"Katalizator"},
-    {"id":"part-16","kind":"image","body":"/images/czesci/kierownica.jpg","answer":"Kierownica"},
-    {"id":"part-17","kind":"image","body":"/images/czesci/poduszka-powietrzna.jpg","answer":"Poduszka powietrzna"},
-    {"id":"part-18","kind":"image","body":"/images/czesci/felga.jpg","answer":"Felga"},
-    {"id":"part-19","kind":"image","body":"/images/czesci/zderzak.jpg","answer":"Zderzak"},
-    {"id":"part-20","kind":"image","body":"/images/czesci/tlok.jpg","answer":"Tłok"},
-    {"id":"part-21","kind":"image","body":"/images/czesci/wtryskiwacz.jpg","answer":"Wtryskiwacz"},
-    {"id":"part-22","kind":"image","body":"/images/czesci/pompa-paliwa.jpg","answer":"Pompa paliwa"},
-    {"id":"part-23","kind":"image","body":"/images/czesci/filtr-powietrza.jpg","answer":"Filtr powietrza"},
-    {"id":"part-24","kind":"image","body":"/images/czesci/immobilizer.jpg","answer":"Immobilizer"},
-    {"id":"part-25","kind":"image","body":"/images/czesci/lusterko.jpg","answer":"Lusterko"}
+    {
+      "id": "part-1",
+      "kind": "image",
+      "body": "/images/czesci/skrzynia-biegow.jpg",
+      "answer": "Skrzynia biegów"
+    },
+    {
+      "id": "part-2",
+      "kind": "image",
+      "body": "/images/czesci/tlumik.jpg",
+      "answer": "Tłumik"
+    },
+    {
+      "id": "part-3",
+      "kind": "image",
+      "body": "/images/czesci/filtr-oleju.jpg",
+      "answer": "Filtr oleju"
+    },
+    {
+      "id": "part-4",
+      "kind": "image",
+      "body": "/images/czesci/hamulce.jpg",
+      "answer": "Hamulce"
+    },
+    {
+      "id": "part-5",
+      "kind": "image",
+      "body": "/images/czesci/pasek-rozrzadu.jpg",
+      "answer": "Pasek rozrządu"
+    },
+    {
+      "id": "part-6",
+      "kind": "image",
+      "body": "/images/czesci/chlodnica.jpg",
+      "answer": "Chłodnica"
+    },
+    {
+      "id": "part-7",
+      "kind": "image",
+      "body": "/images/czesci/rozrusznik.jpg",
+      "answer": "Rozrusznik"
+    },
+    {
+      "id": "part-8",
+      "kind": "image",
+      "body": "/images/czesci/alternator.jpg",
+      "answer": "Alternator"
+    },
+    {
+      "id": "part-9",
+      "kind": "image",
+      "body": "/images/czesci/akumulator.jpg",
+      "answer": "Akumulator"
+    },
+    {
+      "id": "part-10",
+      "kind": "image",
+      "body": "/images/czesci/swiece-zaplonowe.jpg",
+      "answer": "Świece zapłonowe"
+    },
+    {
+      "id": "part-11",
+      "kind": "image",
+      "body": "/images/czesci/amortyzator.jpg",
+      "answer": "Amortyzator"
+    },
+    {
+      "id": "part-12",
+      "kind": "image",
+      "body": "/images/czesci/sprzeglo.jpg",
+      "answer": "Sprzęgło"
+    },
+    {
+      "id": "part-13",
+      "kind": "image",
+      "body": "/images/czesci/wycieraczki.jpg",
+      "answer": "Wycieraczki"
+    },
+    {
+      "id": "part-14",
+      "kind": "image",
+      "body": "/images/czesci/turbosprezarka.jpg",
+      "answer": "Turbosprężarka"
+    },
+    {
+      "id": "part-15",
+      "kind": "image",
+      "body": "/images/czesci/katalizator.jpg",
+      "answer": "Katalizator"
+    },
+    {
+      "id": "part-16",
+      "kind": "image",
+      "body": "/images/czesci/kierownica.jpg",
+      "answer": "Kierownica"
+    },
+    {
+      "id": "part-17",
+      "kind": "image",
+      "body": "/images/czesci/poduszka-powietrzna.jpg",
+      "answer": "Poduszka powietrzna"
+    },
+    {
+      "id": "part-18",
+      "kind": "image",
+      "body": "/images/czesci/felga.jpg",
+      "answer": "Felga"
+    },
+    {
+      "id": "part-19",
+      "kind": "image",
+      "body": "/images/czesci/zderzak.jpg",
+      "answer": "Zderzak"
+    },
+    {
+      "id": "part-20",
+      "kind": "image",
+      "body": "/images/czesci/tlok.jpg",
+      "answer": "Tłok"
+    },
+    {
+      "id": "part-21",
+      "kind": "image",
+      "body": "/images/czesci/wtryskiwacz.jpg",
+      "answer": "Wtryskiwacz"
+    },
+    {
+      "id": "part-22",
+      "kind": "image",
+      "body": "/images/czesci/pompa-paliwa.jpg",
+      "answer": "Pompa paliwa"
+    },
+    {
+      "id": "part-23",
+      "kind": "image",
+      "body": "/images/czesci/filtr-powietrza.jpg",
+      "answer": "Filtr powietrza"
+    },
+    {
+      "id": "part-24",
+      "kind": "image",
+      "body": "/images/czesci/immobilizer.jpg",
+      "answer": "Immobilizer"
+    },
+    {
+      "id": "part-25",
+      "kind": "image",
+      "body": "/images/czesci/lusterko.jpg",
+      "answer": "Lusterko"
+    },
+    {
+      "id": "part-26",
+      "kind": "image",
+      "body": "/images/czesci/reflektor.jpg",
+      "answer": "Reflektor"
+    },
+    {
+      "id": "part-27",
+      "kind": "image",
+      "body": "/images/czesci/wal-korbowy.jpg",
+      "answer": "Wał korbowy"
+    },
+    {
+      "id": "part-28",
+      "kind": "image",
+      "body": "/images/czesci/glowica-cylindrow.jpg",
+      "answer": "Głowica cylindrów"
+    },
+    {
+      "id": "part-29",
+      "kind": "image",
+      "body": "/images/czesci/pas-bezpieczenstwa.jpg",
+      "answer": "Pas bezpieczeństwa"
+    },
+    {
+      "id": "part-30",
+      "kind": "image",
+      "body": "/images/czesci/dzwignia-biegow.jpg",
+      "answer": "Dźwignia zmiany biegów"
+    },
+    {
+      "id": "part-31",
+      "kind": "image",
+      "body": "/images/czesci/zawor-silnika.jpg",
+      "answer": "Zawór silnika"
+    },
+    {
+      "id": "part-32",
+      "kind": "image",
+      "body": "/images/czesci/klocki-hamulcowe.jpg",
+      "answer": "Klocki hamulcowe"
+    },
+    {
+      "id": "part-33",
+      "kind": "image",
+      "body": "/images/czesci/gaznik.jpg",
+      "answer": "Gaźnik"
+    },
+    {
+      "id": "part-34",
+      "kind": "image",
+      "body": "/images/czesci/dyferencjal.jpg",
+      "answer": "Mechanizm różnicowy"
+    },
+    {
+      "id": "part-35",
+      "kind": "image",
+      "body": "/images/czesci/wal-napedowy.jpg",
+      "answer": "Wał napędowy"
+    }
   ]
 }

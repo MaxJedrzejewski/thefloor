@@ -8,6 +8,11 @@ export interface Category {
   name: string;
   /** Bundled categories ship with the app and cannot be deleted. */
   source: 'bundled' | 'custom';
+  /**
+   * Bumped in a bundled file when its prompts were replaced wholesale. A browser copy saved
+   * under an older revision then yields to the file, keeping only prompts the host created.
+   */
+  revision?: number;
   prompts: Prompt[];
 }
 
@@ -80,7 +85,9 @@ export function parseCategory(raw: unknown, source: Category['source']): Categor
     prompts.push(prompt);
   });
 
-  return { id: obj.id, name: obj.name, source, prompts };
+  const category: Category = { id: obj.id, name: obj.name, source, prompts };
+  if (typeof obj.revision === 'number') category.revision = obj.revision;
+  return category;
 }
 
 export function newPromptId(): string {

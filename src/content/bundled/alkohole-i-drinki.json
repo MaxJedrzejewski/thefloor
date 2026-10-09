@@ -21,6 +21,26 @@
     {"id":"alc-17","kind":"text","body":"Sake pochodzi z …","answer":"Japonii"},
     {"id":"alc-18","kind":"text","body":"Ouzo pochodzi z …","answer":"Grecji"},
     {"id":"alc-19","kind":"text","body":"Tequilę robi się z …","answer":"Agawy"},
-    {"id":"alc-20","kind":"text","body":"Amaretto pachnie …","answer":"Migdałami"}
+    {"id":"alc-20","kind":"text","body":"Amaretto pachnie …","answer":"Migdałami"},
+    {"id":"alc-21","kind":"text","body":"Whisky Sour — jaki sok cytrusowy się do niego dodaje?","answer":"Cytrynowy"},
+    {"id":"alc-22","kind":"text","body":"Daiquiri — jaki alkohol jest bazą?","answer":"Rum"},
+    {"id":"alc-23","kind":"text","body":"Tom Collins — jaki alkohol jest bazą?","answer":"Gin"},
+    {"id":"alc-24","kind":"text","body":"Espresso Martini — jaki napój poza wódką i likierem kawowym?","answer":"Espresso (kawa)"},
+    {"id":"alc-25","kind":"text","body":"Mimosa — z jakich dwóch składników się ją robi?","answer":"Szampan (prosecco) i sok pomarańczowy"},
+    {"id":"alc-26","kind":"text","body":"Manhattan — jaki alkohol jest bazą?","answer":"Whiskey (rye lub bourbon)"},
+    {"id":"alc-27","kind":"text","body":"Long Island Iced Tea — który napój gazowany się do niego dodaje, choć nie ma w nim herbaty?","answer":"Cola"},
+    {"id":"alc-28","kind":"text","body":"Sex on the Beach — jaki alkohol jest bazą?","answer":"Wódka"},
+    {"id":"alc-29","kind":"text","body":"Dark ’n’ Stormy — jaki alkohol i jaki napój?","answer":"Ciemny rum i piwo imbirowe"},
+    {"id":"alc-30","kind":"text","body":"Tequila Sunrise — jaki sok i jaki syrop tworzą efekt wschodu słońca?","answer":"Sok pomarańczowy i grenadyna"},
+    {"id":"alc-31","kind":"text","body":"Guinness to piwo pochodzące z …","answer":"Irlandii (Dublin)"},
+    {"id":"alc-32","kind":"text","body":"Cognac pochodzi z …","answer":"Francji"},
+    {"id":"alc-33","kind":"text","body":"Prosecco pochodzi z …","answer":"Włoch"},
+    {"id":"alc-34","kind":"text","body":"Whisky „Johnnie Walker” pochodzi z …","answer":"Szkocji"},
+    {"id":"alc-35","kind":"text","body":"Pisco, narodowy trunek Peru i Chile, jest destylowany z …","answer":"Winogron"},
+    {"id":"alc-36","kind":"text","body":"Absynt ma charakterystyczny zielony kolor i smak …","answer":"Anyżu"},
+    {"id":"alc-37","kind":"text","body":"Grappa to włoski trunek destylowany z …","answer":"Wytłoczyn winogron"},
+    {"id":"alc-38","kind":"text","body":"Sangria to wino z owocami pochodzące z …","answer":"Hiszpanii"},
+    {"id":"alc-39","kind":"text","body":"Limoncello pochodzi z …","answer":"Włoch (okolice Neapolu i Amalfi)"},
+    {"id":"alc-40","kind":"text","body":"Kahlúa to likier o smaku …","answer":"Kawowym"}
   ]
 }

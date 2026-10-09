@@ -7,6 +7,8 @@ import { DuelScreen } from '../react/screens/DuelScreen';
 import { DuelResultScreen } from '../react/screens/DuelResultScreen';
 import { ChampionScreen } from '../react/screens/ChampionScreen';
 import { CategoryEditorScreen } from '../react/screens/CategoryEditorScreen';
+import { HostScreen } from '../react/screens/HostScreen';
+import { isHostWindow } from './hostChannel';
 import { useCategories } from '../react/hooks/useCategories';
 import {
   createTournament,
@@ -19,7 +21,7 @@ import { availableCategories } from '../engine/pickCategory';
 import type { Tournament, TournamentDraft } from '../tournament/types';
 import type { DuelSummary } from '../engine/duel/types';
 
-export function App() {
+function MainApp() {
   const { categories, save, remove } = useCategories();
   const [tournament, setTournament] = useState<Tournament | null>(loadTournament);
   const [editing, setEditing] = useState(false);
@@ -132,4 +134,9 @@ export function App() {
         />
       );
   }
+}
+
+export function App() {
+  // The host window is a read-only view: it must never load or save the tournament.
+  return isHostWindow() ? <HostScreen /> : <MainApp />;
 }

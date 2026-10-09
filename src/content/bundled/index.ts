@@ -15,9 +15,10 @@ import fastFoody from './fast-foody-loga.json';
 import zwierzeta from './zwierzeta.json';
 import zawody from './zawody.json';
 import polska from './polska.json';
+import ania from './ania.json';
 import ceny from './zgadywanie-cen-produktow.json';
 
-const raw: unknown[] = [worldCapitals, rownania, seriale, filmy, influencerzy, urodziny, samochody, warzywa, owoce, alkohole, czesci, ciuchy, fastFoody, zwierzeta, zawody, polska, ceny];
+const raw: unknown[] = [worldCapitals, rownania, seriale, filmy, influencerzy, urodziny, samochody, warzywa, owoce, alkohole, czesci, ciuchy, fastFoody, zwierzeta, zawody, polska, ceny, ania];
 
 export const BUNDLED_CATEGORIES: Category[] = raw
   .map((entry) => parseCategory(entry, 'bundled'))
