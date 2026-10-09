@@ -1,12 +1,14 @@
 import type { Bracket, Match, Player, SlotRef } from './types';
 
-/** The player occupying a slot, or null if it is a bye or still undecided. */
+/** The player occupying a slot, or null if it is a bye, an unfilled wildcard or still undecided. */
 export function slotPlayer(bracket: Bracket, slot: SlotRef): Player | null {
   switch (slot.kind) {
     case 'bye':
       return null;
     case 'player':
       return bracket.players[slot.playerId] ?? null;
+    case 'wildcard':
+      return slot.playerId ? (bracket.players[slot.playerId] ?? null) : null;
     case 'winnerOf': {
       const source = bracket.matches[slot.matchId];
       if (!source?.winnerId) return null;

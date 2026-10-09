@@ -3,6 +3,7 @@ import { createTournament, tournamentReducer, type TournamentEvent } from '../to
 import { availableCategories } from '../../engine/pickCategory';
 import { champion, nextPendingMatch, readyMatches } from '../../engine/bracket/selectors';
 import { BUNDLED_CATEGORIES } from '../../content/bundled';
+import { wildcardCandidates, wildcardSlots } from '../../engine/bracket/wildcard';
 import { loadCategories } from '../../content/categoryStore';
 import type { Tournament } from '../types';
 import type { DuelSummary } from '../../engine/duel/types';
@@ -59,7 +60,25 @@ function summaryFor(state: Tournament): DuelSummary {
   };
 }
 
-function playOneDuel(state: Tournament): Tournament {
+/** Fill every open wildcard slot with the best-seeded round-one loser, as a host would. */
+function fillWildcards(state: Tournament): Tournament {
+  let current = state;
+  for (const slot of wildcardSlots(current.bracket)) {
+    const candidate = wildcardCandidates(current.bracket, slot)[0];
+    if (!slot.playerId && candidate) {
+      current = tournamentReducer(current, {
+        type: 'ASSIGN_WILDCARD',
+        matchId: slot.matchId,
+        slot: slot.slot,
+        playerId: candidate.id,
+      });
+    }
+  }
+  return current;
+}
+
+function playOneDuel(initial: Tournament): Tournament {
+  const state = fillWildcards(initial);
   const drawn = run(state, ...pickEvents(state), { type: 'BEGIN_DUEL' });
   return run(drawn, { type: 'FINISH_DUEL', summary: summaryFor(drawn) }, { type: 'CONTINUE' });
 }
@@ -121,12 +140,11 @@ describe('DRAW_NEXT_DUEL', () => {
     expect(state.phase).toBe('bracket');
   });
 
-  it('gives a 6-player bracket its first duel between unseeded players, not a bye', () => {
+  it('opens a 6-player bracket with the top seed against the bottom seed, no bye', () => {
     const initial = makeTournament(6);
     const state = run(initial, openFirst(initial), { type: 'DRAW_NEXT_DUEL', categoryId: PICK, categories });
-    const seeds = [state.active!.setup.players.A.playerId, state.active!.setup.players.B.playerId];
-    expect(seeds).not.toContain('p1');
-    expect(seeds).not.toContain('p2');
+    const ids = [state.active!.setup.players.A.playerId, state.active!.setup.players.B.playerId];
+    expect(ids.sort()).toEqual(['p1', 'p6']);
   });
 
   it('does nothing when no categories are enabled', () => {
@@ -194,13 +212,13 @@ describe('playing a tournament through', () => {
     expect(state.duelsPlayed).toBe(3);
   });
 
-  it('plays only the real duels in a bracket with byes', () => {
+  it('plays 6 duels for 6 players, because the wildcard plays again', () => {
     let state = makeTournament(6);
     for (let i = 0; i < 20 && state.phase !== 'champion'; i++) {
       state = playOneDuel(state);
     }
     expect(state.phase).toBe('champion');
-    expect(state.duelsPlayed).toBe(5);
+    expect(state.duelsPlayed).toBe(6);
   });
 
   it('does not repeat a category until the pool is used up', () => {
@@ -228,5 +246,32 @@ describe('playing a tournament through', () => {
       state = run(drawn, { type: 'FINISH_DUEL', summary }, { type: 'CONTINUE' });
     }
     expect(seen.size).toBeGreaterThan(0);
+  });
+});
+
+describe('ASSIGN_WILDCARD', () => {
+  const assign = { type: 'ASSIGN_WILDCARD', matchId: 'r2m0', slot: 1, playerId: 'p5' } as const;
+
+  it('ignores an invalid assignment instead of throwing', () => {
+    const state = makeTournament(6);
+    expect(tournamentReducer(state, assign)).toBe(state); // nobody has lost yet
+  });
+
+  it('only applies from the bracket phase', () => {
+    const state = { ...makeTournament(6), phase: 'duel' } as Tournament;
+    expect(tournamentReducer(state, assign)).toBe(state);
+  });
+
+  it('fills the slot once a round-one loser exists', () => {
+    let state = makeTournament(6);
+    const first = readyMatches(state.bracket)[0]!;
+    state = tournamentReducer(state, { type: 'OPEN_CATEGORY_PICK', matchId: first.id });
+    state = { ...state, phase: 'bracket', selectedMatchId: null };
+    const bracketWithLoser = {
+      ...state.bracket,
+      matches: { ...state.bracket.matches, [first.id]: { ...first, status: 'done' as const, winnerId: 'p1', loserId: 'p6' } },
+    };
+    const next = tournamentReducer({ ...state, bracket: bracketWithLoser }, { ...assign, playerId: 'p6' });
+    expect(next.bracket.matches['r2m0']!.slots[1]).toEqual({ kind: 'wildcard', playerId: 'p6' });
   });
 });

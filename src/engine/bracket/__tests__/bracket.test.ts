@@ -2,7 +2,8 @@ import { describe, it, expect } from 'vitest';
 import { nextPowerOfTwo, standardSeedOrder } from '../seeding';
 import { buildBracket } from '../buildBracket';
 import { reportResult } from '../advance';
-import { nextPendingMatch, champion, roundLabel, matchPlayers } from '../selectors';
+import { nextPendingMatch, readyMatches, champion, roundLabel, matchPlayers } from '../selectors';
+import { assignWildcard, wildcardCandidates, wildcardSlots } from '../wildcard';
 import type { Bracket, Player } from '../types';
 
 function players(count: number): Player[] {
@@ -13,10 +14,23 @@ function players(count: number): Player[] {
   }));
 }
 
+/** Fill any open wildcard slot with the best-seeded round-one loser, as a host might. */
+function fillWildcards(bracket: Bracket): Bracket {
+  let current = bracket;
+  for (const slot of wildcardSlots(current)) {
+    const candidate = wildcardCandidates(current, slot)[0];
+    if (!slot.playerId && !slot.locked && candidate) {
+      current = assignWildcard(current, slot.matchId, slot.slot, candidate.id);
+    }
+  }
+  return current;
+}
+
 /** Play every remaining match, always advancing the better seed. */
 function playOutFavourites(bracket: Bracket): Bracket {
   let current = bracket;
   for (let guard = 0; guard < 100; guard++) {
+    current = fillWildcards(current);
     const match = nextPendingMatch(current);
     if (!match) break;
     const [a, b] = matchPlayers(current, match);
@@ -69,32 +83,47 @@ describe('buildBracket', () => {
     expect([a?.seed, b?.seed]).toEqual([1, 8]);
   });
 
-  it('gives a 6-player bracket byes to seeds 1 and 2', () => {
+  it('plays a full first round for 6 players, with one wildcard slot in round two', () => {
     const bracket = buildBracket(players(6));
     expect(bracket.size).toBe(8);
+    const roundOne = Object.values(bracket.matches).filter((m) => m.round === 1);
+    expect(roundOne).toHaveLength(3);
+    expect(roundOne.every((m) => m.status === 'ready')).toBe(true);
+    expect(Object.values(bracket.matches).some((m) => m.slots.some((s) => s.kind === 'bye'))).toBe(false);
 
-    const byeOpponents = Object.values(bracket.matches)
-      .filter((m) => m.slots.some((s) => s.kind === 'bye'))
-      .flatMap((m) => matchPlayers(bracket, m))
-      .filter((p) => p !== null)
-      .map((p) => p!.seed)
-      .sort((x, y) => x - y);
-
-    expect(byeOpponents).toEqual([1, 2]);
+    const wildcards = Object.values(bracket.matches).flatMap((m) => m.slots).filter((s) => s.kind === 'wildcard');
+    expect(wildcards).toHaveLength(1);
   });
 
-  it('auto-advances a player who drew a bye', () => {
+  it('pairs best against worst in round one', () => {
     const bracket = buildBracket(players(6));
-    const byeMatches = Object.values(bracket.matches).filter((m) => m.slots.some((s) => s.kind === 'bye'));
-    expect(byeMatches).toHaveLength(2);
-    expect(byeMatches.every((m) => m.status === 'done')).toBe(true);
-    expect(byeMatches.map((m) => m.winnerId).sort()).toEqual(['p1', 'p2']);
+    const seeds = ['r1m0', 'r1m1', 'r1m2'].map((id) => matchPlayers(bracket, bracket.matches[id]!).map((p) => p?.seed));
+    expect(seeds).toEqual([[1, 6], [2, 5], [3, 4]]);
   });
 
-  it('never asks the host to play a bye match', () => {
+  it('puts the wildcard against the strongest advancer, never against another wildcard', () => {
+    for (const count of [5, 6, 9, 10, 11, 12, 13, 14, 15]) {
+      const bracket = buildBracket(players(count));
+      for (const match of Object.values(bracket.matches)) {
+        expect(match.slots.filter((s) => s.kind === 'wildcard').length).toBeLessThanOrEqual(1);
+      }
+    }
+    const bracket = buildBracket(players(6));
+    expect(bracket.matches['r2m0']!.slots).toEqual([{ kind: 'winnerOf', matchId: 'r1m0' }, { kind: 'wildcard', playerId: null }]);
+  });
+
+  it('leaves the odd player an open wildcard opponent, played after every other round-one duel', () => {
+    const bracket = buildBracket(players(7));
+    expect(bracket.matches['r1m0']!.slots).toEqual([{ kind: 'player', playerId: 'p1' }, { kind: 'wildcard', playerId: null }]);
+    const roundOne = bracket.order.filter((id) => bracket.matches[id]!.round === 1);
+    expect(roundOne[roundOne.length - 1]).toBe('r1m0');
+    expect(bracket.matches['r1m0']!.status).toBe('waiting');
+    expect(Object.values(bracket.matches).some((m) => m.slots.some((s) => s.kind === 'bye'))).toBe(false);
+  });
+
+  it('never offers a match with an unfilled wildcard slot', () => {
     const bracket = buildBracket(players(5));
-    const pending = nextPendingMatch(bracket);
-    expect(pending?.slots.every((s) => s.kind !== 'bye')).toBe(true);
+    expect(readyMatches(bracket).every((m) => m.slots.every((s) => s.kind !== 'wildcard'))).toBe(true);
   });
 
   it('marks only matches with two known players as ready', () => {
@@ -158,17 +187,6 @@ describe('playing a tournament to completion', () => {
     const finished = playOutFavourites(buildBracket(players(count)));
     expect(nextPendingMatch(finished)).toBeNull();
     expect(champion(finished)).toBe('p1');
-  });
-
-  it('needs exactly n-1 real duels for n players', () => {
-    for (const count of [3, 5, 6, 7, 11]) {
-      const bracket = buildBracket(players(count));
-      const finished = playOutFavourites(bracket);
-      const played = Object.values(finished.matches).filter(
-        (m) => m.slots.every((s) => s.kind !== 'bye'),
-      );
-      expect(played).toHaveLength(count - 1);
-    }
   });
 
   it('names an immediate champion for a one-player tournament', () => {

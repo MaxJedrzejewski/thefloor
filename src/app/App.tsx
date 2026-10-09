@@ -125,6 +125,9 @@ export function App() {
         <BracketScreen
           tournament={tournament}
           onPickCategory={(matchId) => send({ type: 'OPEN_CATEGORY_PICK', matchId })}
+          onAssignWildcard={(matchId, slot, playerId) =>
+            send({ type: 'ASSIGN_WILDCARD', matchId, slot, playerId })
+          }
           onNewTournament={newTournament}
         />
       );

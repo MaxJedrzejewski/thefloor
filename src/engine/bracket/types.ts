@@ -10,7 +10,9 @@ export interface Player {
 export type SlotRef =
   | { kind: 'player'; playerId: string }
   | { kind: 'winnerOf'; matchId: string }
-  | { kind: 'bye' };
+  | { kind: 'bye' }
+  /** A slot the host fills by hand with a round-one loser; empty until then. */
+  | { kind: 'wildcard'; playerId: string | null };
 
 export type MatchStatus = 'waiting' | 'ready' | 'done';
 

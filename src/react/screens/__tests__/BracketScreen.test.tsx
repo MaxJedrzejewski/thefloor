@@ -28,6 +28,7 @@ function renderBracket(playerCount: number, tournament?: Tournament) {
     <BracketScreen
       tournament={tournament ?? makeTournament(playerCount)}
       onPickCategory={onPickCategory}
+      onAssignWildcard={vi.fn()}
       onNewTournament={onNewTournament}
     />,
   );
@@ -42,19 +43,42 @@ describe('BracketScreen', () => {
     expect(screen.getByRole('heading', { name: 'Final' })).toBeInTheDocument();
   });
 
-  it('marks the two byes in a 6-player bracket', () => {
+  it('plays a full first round and shows the open wildcard slot for 6 players', () => {
     renderBracket(6);
-    expect(screen.getAllByTestId('bye-badge')).toHaveLength(2);
+    expect(screen.queryByTestId('bye-badge')).not.toBeInTheDocument();
+    expect(screen.getByText('Wildcard (host picks)')).toBeInTheDocument();
+    expect(screen.getByTestId('wildcard-panel')).toHaveTextContent(/1 slot is still open/i);
   });
 
-  it('offers a choice between both ready duels, never a bye', () => {
+  it('offers all three first-round duels', () => {
     renderBracket(6);
+    expect(screen.getAllByTestId('ready-match-button')).toHaveLength(3);
+  });
 
-    // Seeds 1 and 2 hold the byes, so they cannot be in either ready duel.
-    const choices = screen.getByText(/pairs are ready/i).closest('section')!;
-    expect(choices).not.toHaveTextContent('Player 1');
-    expect(choices).not.toHaveTextContent('Player 2');
-    expect(screen.getAllByTestId('ready-match-button')).toHaveLength(2);
+  it('shows no wildcard panel when the field needs none', () => {
+    renderBracket(8);
+    expect(screen.queryByTestId('wildcard-panel')).not.toBeInTheDocument();
+  });
+
+  it('reports the chosen wildcard to the host callback', async () => {
+    let tournament = makeTournament(6);
+    for (const id of ['r1m0', 'r1m1', 'r1m2']) {
+      const m = tournament.bracket.matches[id]!;
+      tournament = {
+        ...tournament,
+        bracket: {
+          ...tournament.bracket,
+          matches: { ...tournament.bracket.matches, [id]: { ...m, status: 'done', winnerId: m.slots[0].kind === 'player' ? m.slots[0].playerId : null, loserId: m.slots[1].kind === 'player' ? m.slots[1].playerId : null } },
+        },
+      };
+    }
+    const onAssignWildcard = vi.fn();
+    const user = userEvent.setup();
+    render(
+      <BracketScreen tournament={tournament} onPickCategory={vi.fn()} onAssignWildcard={onAssignWildcard} onNewTournament={vi.fn()} />,
+    );
+    await user.selectOptions(screen.getByRole('combobox'), 'Player 5');
+    expect(onAssignWildcard).toHaveBeenCalledWith('r2m0', 1, 'p5');
   });
 
   it('lets the host pick which of several ready duels plays next', async () => {
@@ -88,9 +112,9 @@ describe('BracketScreen', () => {
     expect(screen.getByText(/you pick the category/i)).toBeInTheDocument();
   });
 
-  it('counts settled matches, byes included', () => {
+  it('counts every match in the bracket, wildcard rounds included', () => {
     renderBracket(6);
-    expect(screen.getByText(/2 of 7 matches settled/i)).toBeInTheDocument();
+    expect(screen.getByText(/0 of 6 matches settled/i)).toBeInTheDocument();
   });
 
   it('shows a completed duel result on the bracket', () => {

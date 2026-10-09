@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
-import { render, screen, act } from '@testing-library/react';
+import { render, screen, act, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { App } from '../App';
 
@@ -191,18 +191,21 @@ describe('App', () => {
     expect(screen.getByText(/0 of 3 matches settled/)).toBeInTheDocument();
   });
 
-  it('gives a six-player bracket two byes and still reaches a champion', async () => {
+  it('lets the host fill the wildcard slot of a six-player field and reaches a champion', async () => {
     const user = userEvent.setup({ delay: null });
     render(<App />);
     await startTournament(user, 6);
 
-    expect(screen.getAllByTestId('bye-badge')).toHaveLength(2);
+    expect(screen.getByText('Wildcard (host picks)')).toBeInTheDocument();
+    for (let i = 0; i < 3; i++) playDuelToTimeout();
 
-    for (let i = 0; i < 5; i++) {
-      playDuelToTimeout();
-    }
+    // Round two cannot be completed until the host brings a loser back.
+    const picker = within(screen.getByTestId('wildcard-panel')).getByRole('combobox');
+    await user.selectOptions(picker, within(picker).getAllByRole('option')[1]!);
+
+    for (let i = 0; i < 3; i++) playDuelToTimeout();
     expect(screen.getByText('Champion')).toBeInTheDocument();
-    expect(screen.getByText(/5 duels/)).toBeInTheDocument();
+    expect(screen.getByText(/6 duels/)).toBeInTheDocument();
   });
 
   it('restores a tournament in progress after a reload, back on the bracket', async () => {

@@ -1,4 +1,5 @@
 import { buildBracket } from '../engine/bracket/buildBracket';
+import { assignWildcard } from '../engine/bracket/wildcard';
 import { reportResult } from '../engine/bracket/advance';
 import { champion, matchPlayers } from '../engine/bracket/selectors';
 import { buildDuelSetup, drawDuel, rngForDuel } from '../engine/pickCategory';
@@ -12,7 +13,8 @@ export type TournamentEvent =
   | { type: 'BEGIN_DUEL' }
   | { type: 'FINISH_DUEL'; summary: DuelSummary }
   | { type: 'CONTINUE' }
-  | { type: 'ABANDON_DUEL' };
+  | { type: 'ABANDON_DUEL' }
+  | { type: 'ASSIGN_WILDCARD'; matchId: string; slot: 0 | 1; playerId: string | null };
 
 export function createTournament(draft: TournamentDraft): Tournament {
   const bracket = buildBracket(draft.players);
@@ -105,6 +107,15 @@ export function tournamentReducer(state: Tournament, event: TournamentEvent): To
         usedCategoryIds: [...new Set([...state.usedCategoryIds, event.summary.categoryId])],
         usedPromptIds: [...new Set([...state.usedPromptIds, ...event.summary.usedPromptIds])],
       };
+    }
+
+    case 'ASSIGN_WILDCARD': {
+      if (state.phase !== 'bracket') return state;
+      try {
+        return { ...state, bracket: assignWildcard(state.bracket, event.matchId, event.slot, event.playerId) };
+      } catch {
+        return state;
+      }
     }
 
     case 'CONTINUE': {

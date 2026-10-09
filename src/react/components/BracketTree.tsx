@@ -12,7 +12,8 @@ function MatchCard({ bracket, match, isNext }: { bracket: Bracket; match: Match;
 
   const row = (player: typeof a, slotIndex: 0 | 1) => {
     const slot = match.slots[slotIndex];
-    const label = player?.name ?? (slot.kind === 'bye' ? 'Bye' : 'TBD');
+    const label =
+      player?.name ?? (slot.kind === 'bye' ? 'Bye' : slot.kind === 'wildcard' ? 'Wildcard (host picks)' : 'TBD');
     const won = !!player && match.winnerId === player.id;
     const lost = !!player && match.status === 'done' && match.winnerId !== player.id;
 

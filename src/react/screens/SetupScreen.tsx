@@ -21,6 +21,7 @@ export function SetupScreen({ categories, onStart, onEditCategories }: Props) {
 
   const filled = names.map((n) => n.trim()).filter(Boolean);
   const duplicateNames = new Set(filled).size !== filled.length;
+
   const canStart = filled.length >= 2 && enabled.length > 0 && !duplicateNames;
 
   const setName = (index: number, value: string) =>

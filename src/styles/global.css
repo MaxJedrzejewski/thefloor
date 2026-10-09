@@ -815,3 +815,18 @@ textarea:focus {
 .category-grid .button {
   width: 100%;
 }
+
+.wildcard-fields {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 0.75rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.wildcard-fields label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
